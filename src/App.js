@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import authAxios from "./lib/authAxios";
+import apiRoute from "./lib/apiRoute";
+import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import Login from "./components/login";
+import Signup from "./components/signup";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [currentUser, setCurrentUser] = useState("");
+
+  const fetchCurrentUser = async () => {
+    try {
+      const response = await authAxios.get(`${apiRoute}current_user`);
+      setCurrentUser(response.data);
+    } catch (error) {
+      console.log(error);
+      setCurrentUser("");
+    }
+  };
+
+  useEffect(() => {
+    fetchCurrentUser();
+  }, []);
+
+  if (!currentUser) {
+    return (
+      <div className="App">
+        <Routes>
+          <Route path={"/"} element={<Login />} />
+          <Route path={"/signup"} element={<Signup />} />
+        </Routes>
+      </div>
+    );
+  } else {
+    return <div>Logged in!</div>;
+  }
 }
 
 export default App;
