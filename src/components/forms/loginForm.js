@@ -14,13 +14,15 @@ const LoginForm = () => {
       email: email,
       password: password,
     };
-
+    localStorage.removeItem("token");
     try {
       const response = await authAxios.post(`${apiRoute}login`, { user: user });
+      console.log(response);
       localStorage.setItem("token", response.headers.authorization);
       setError("");
       window.location.href = "/";
     } catch (error) {
+      console.log(error);
       setError(error.response.data);
     }
   };
@@ -44,7 +46,7 @@ const LoginForm = () => {
       <FormInput
         errors={error}
         name={"password"}
-        type={"text"}
+        type={"password"}
         value={password}
         placeholder={"Password"}
         onChange={setPassword}

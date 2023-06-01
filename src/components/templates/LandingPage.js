@@ -1,11 +1,9 @@
-import LoginForm from "./forms/loginForm";
-
-const Login = () => {
+const LandingPage = ({ childComponent: ChildComponent }) => {
   return (
     <div className="flex sm:flex-row flex-col">
       {/* left Side */}
       <div className="flex h-screen w-full bg-offwhite justify-center items-center">
-        <LoginForm />
+        <ChildComponent />
       </div>
       {/* right side */}
       <div className="flex h-screen w-full bg-green justify-center items-center">
@@ -23,4 +21,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LandingPage;
