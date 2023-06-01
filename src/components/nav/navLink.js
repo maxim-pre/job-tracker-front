@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const NavLink = ({ url, icon: Icon, label, open }) => {
+const NavLink = ({ url, icon: Icon, label, open, currentUser }) => {
   return (
     <Link to={url}>
       <div
@@ -10,6 +10,7 @@ const NavLink = ({ url, icon: Icon, label, open }) => {
       >
         <Icon
           className={`text-2xl opacity-80 rounded-full group-hover:bg-offwhite group-hover:bg-opacity-20 group-hover:opacity-100 border-0 duration-300 p-1 `}
+          letter={currentUser ? currentUser["first_name"][0].toLowerCase() : ""}
           style={{ fontWeight: "900" }}
           size={"30px"}
         />

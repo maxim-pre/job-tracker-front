@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Nav from "./components/nav/nav";
 import MobileNavBar from "./components/nav/mobileNavBar";
+import MobileNavMenu from "./components/nav/mobileNavMenu";
 import LandingPage from "./components/templates/LandingPage";
 import LoginForm from "./components/forms/loginForm";
 import SignupForm from "./components/forms/signupForm";
@@ -13,11 +14,11 @@ import JobTracker from "./components/jobTracker";
 import Contacts from "./components/contacts";
 function App() {
   const [currentUser, setCurrentUser] = useState("");
+  const [nav, setNav] = useState(false);
 
   const fetchCurrentUser = async () => {
     try {
       const response = await authAxios.get(`${apiRoute}current_user`);
-      console.log(response);
       setCurrentUser(response.data);
     } catch (error) {
       console.log(error);
@@ -46,16 +47,19 @@ function App() {
     );
   } else {
     return (
-      <div className="relative min-h-screen md:flex App">
+      <div className="flex flex-col min-h-screen md:flex-row App">
+        <MobileNavBar nav={nav} setNav={setNav} />
+        {nav && <MobileNavMenu setNav={setNav} currentUser={currentUser} />}
         {/* side Nav */}
-        <MobileNavBar />
-        <Nav />
+        <Nav currentUser={currentUser} />
         {/* content */}
-        <Routes>
-          <Route path={"/"} element={<Dashboard />} />
-          <Route path={"/jobtracker"} element={<JobTracker />} />
-          <Route path={"/contacts"} element={<Contacts />} />
-        </Routes>
+        <div className={`${nav ? "hidden" : ""}`}>
+          <Routes>
+            <Route path={"/"} element={<Dashboard />} />
+            <Route path={"/jobtracker"} element={<JobTracker />} />
+            <Route path={"/contacts"} element={<Contacts />} />
+          </Routes>
+        </div>
       </div>
     );
   }
