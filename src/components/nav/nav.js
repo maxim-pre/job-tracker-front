@@ -1,12 +1,11 @@
 import { AiOutlineRight } from "react-icons/ai";
 import { AiOutlineLeft } from "react-icons/ai";
-import { BiHomeAlt2 } from "react-icons/bi";
 import { RiContactsBook2Fill } from "react-icons/ri";
 import { RiHome3Fill } from "react-icons/ri";
 import { MdWork } from "react-icons/md";
 import { useState } from "react";
-import NavButton from "./buttons/navButton";
-import NavLink from "./common/navLink";
+import NavButton from "../buttons/navButton";
+import NavLink from "./navLink";
 
 const Nav = () => {
   const [open, setOpen] = useState(false);
