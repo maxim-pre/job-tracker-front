@@ -8,6 +8,9 @@ import MobileNavBar from "./components/mobileNavBar";
 import LandingPage from "./components/templates/LandingPage";
 import LoginForm from "./components/forms/loginForm";
 import SignupForm from "./components/forms/signupForm";
+import Dashboard from "./components/dashboard";
+import JobTracker from "./components/jobTracker";
+import Contacts from "./components/contacts";
 function App() {
   const [currentUser, setCurrentUser] = useState("");
 
@@ -48,7 +51,11 @@ function App() {
         <MobileNavBar />
         <Nav />
         {/* content */}
-        <div className="flex-1 p-4">hello</div>
+        <Routes>
+          <Route path={"/"} element={<Dashboard />} />
+          <Route path={"/jobtracker"} element={<JobTracker />} />
+          <Route path={"/contacts"} element={<Contacts />} />
+        </Routes>
       </div>
     );
   }
