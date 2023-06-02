@@ -1,5 +1,5 @@
-import TableHeader from "./common/tableHeader";
-import TableBody from "./common/tableBody";
+import TableHeader from "../common/tableHeader";
+import TableBody from "../common/tableBody";
 import _ from "lodash";
 
 const JobsTable = ({ jobs, onSelectJob, selectedJobIds }) => {
@@ -23,7 +23,7 @@ const JobsTable = ({ jobs, onSelectJob, selectedJobIds }) => {
   ];
 
   return (
-    <table>
+    <table className="w-full">
       <TableHeader columns={columns} />
       <TableBody columns={columns} data={jobs} />
     </table>
