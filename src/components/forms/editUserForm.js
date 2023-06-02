@@ -1,12 +1,9 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-
 import authAxios from "../../lib/authAxios";
 import apiRoute from "../../lib/apiRoute";
 import FormInput from "../common/formInput";
-import { GiConsoleController } from "react-icons/gi";
 const EditUserForm = ({ currentUser, setCurrentUser }) => {
-  console.log(currentUser);
   const [firstName, setFirstName] = useState(currentUser.first_name);
   const [lastName, setLastName] = useState(currentUser.last_name);
   const [email, setEmail] = useState(currentUser.email);
@@ -23,14 +20,13 @@ const EditUserForm = ({ currentUser, setCurrentUser }) => {
       const response = await authAxios.patch(`${apiRoute}signup`, {
         user: user,
       });
-      console.log(response);
       setCurrentUser({
         ...currentUser,
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
       });
-      console.log(response);
+      toast.success("successfully saved details");
     } catch (error) {
       console.log(error);
       setErrors(error.response.data.status.errors);

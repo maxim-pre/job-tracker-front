@@ -19,6 +19,7 @@ import Logout from "./components/logout";
 function App() {
   const [currentUser, setCurrentUser] = useState("");
   const [nav, setNav] = useState(false);
+  const [jobs, setJobs] = useState([]);
 
   const fetchCurrentUser = async () => {
     try {
@@ -30,8 +31,18 @@ function App() {
     }
   };
 
+  const fetchJobs = async () => {
+    try {
+      const response = await authAxios.get(`${apiRoute}jobs`);
+      setJobs(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchCurrentUser();
+    fetchJobs();
   }, []);
 
   if (!currentUser) {
@@ -69,7 +80,10 @@ function App() {
                 />
               }
             />
-            <Route path={"/jobtracker"} element={<JobTracker />} />
+            <Route
+              path={"/jobtracker"}
+              element={<JobTracker jobs={jobs} setJobs={setJobs} />}
+            />
             <Route path={"/contacts"} element={<Contacts />} />
             <Route path={"/logout"} element={<Logout />} />
           </Routes>
