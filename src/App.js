@@ -1,7 +1,9 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import authAxios from "./lib/authAxios";
 import apiRoute from "./lib/apiRoute";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 import Nav from "./components/nav/nav";
 import MobileNavBar from "./components/nav/mobileNavBar";
@@ -12,6 +14,8 @@ import SignupForm from "./components/forms/signupForm";
 import Dashboard from "./components/dashboard";
 import JobTracker from "./components/jobTracker";
 import Contacts from "./components/contacts";
+import Account from "./components/account";
+import Logout from "./components/logout";
 function App() {
   const [currentUser, setCurrentUser] = useState("");
   const [nav, setNav] = useState(false);
@@ -53,13 +57,24 @@ function App() {
         {/* side Nav */}
         <Nav currentUser={currentUser} />
         {/* content */}
-        <div className={`${nav ? "hidden" : ""}`}>
+        <div className={`${nav ? "hidden" : "flex-1 p-4 bg-offwhite"}`}>
           <Routes>
             <Route path={"/"} element={<Dashboard />} />
+            <Route
+              path={"/account"}
+              element={
+                <Account
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
             <Route path={"/jobtracker"} element={<JobTracker />} />
             <Route path={"/contacts"} element={<Contacts />} />
+            <Route path={"/logout"} element={<Logout />} />
           </Routes>
         </div>
+        <ToastContainer />
       </div>
     );
   }

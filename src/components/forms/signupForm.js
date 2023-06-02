@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import authAxios from "../../lib/authAxios";
 import apiRoute from "../../lib/apiRoute";
 import FormInput from "../common/formInput";
-import FormError from "../common/formError";
 const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

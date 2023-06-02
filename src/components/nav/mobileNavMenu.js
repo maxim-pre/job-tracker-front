@@ -30,7 +30,7 @@ const MobileNavMenu = ({ setNav, currentUser }) => {
       <div className="">
         <hr className="mx-1 text-white"></hr>
         <NavLink
-          url={"/contacts"}
+          url={"/account"}
           icon={ProfileIcon}
           label={"Account"}
           open={true}

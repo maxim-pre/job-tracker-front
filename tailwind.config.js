@@ -8,6 +8,8 @@ module.exports = {
       green: "#588157",
       white: "#fff",
       error: "#cc0000",
+      gray: "#e5e5e5",
+      darkgray: "#6c757d",
     },
   },
   plugins: [],
