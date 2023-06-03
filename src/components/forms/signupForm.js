@@ -25,7 +25,6 @@ const SignupForm = () => {
       setErrors("");
       window.location.href = "/";
     } catch (error) {
-      console.log(error);
       setErrors(error.response.data.status.errors);
     }
   };

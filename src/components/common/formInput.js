@@ -13,6 +13,7 @@ const FormInput = ({ placeholder, type, value, onChange, errors, name }) => {
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
+        id={name ? name : ""}
       ></input>
       {errors[name] && (
         <FormError label={placeholder} message={errors[name][0]} />

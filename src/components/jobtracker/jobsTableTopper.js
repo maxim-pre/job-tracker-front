@@ -3,7 +3,13 @@ import DeleteButton from "../buttons/deleteButton";
 import NewResourceButton from "../buttons/newResourceButton";
 import { HiOutlinePencilAlt } from "react-icons/hi";
 
-const JobsTableTopper = ({ handleSelectAllJobs, selectedJobIds, jobs }) => {
+const JobsTableTopper = ({
+  handleSelectAllJobs,
+  handleDeleteSelectedJobs,
+  selectedJobIds,
+  jobs,
+  openJobModal,
+}) => {
   return (
     <div className="flex justify-between items-center py-2 px-1">
       <div className="flex">
@@ -16,14 +22,19 @@ const JobsTableTopper = ({ handleSelectAllJobs, selectedJobIds, jobs }) => {
 
         {selectedJobIds.length > 0 && (
           <div className="flex">
-            <DeleteButton />
+            <DeleteButton
+              handleClick={() => handleDeleteSelectedJobs(selectedJobIds)}
+            />
             <div className="ml-2">
               <GenericButton icon={HiOutlinePencilAlt} label={"Status"} />
             </div>
           </div>
         )}
       </div>
-      <NewResourceButton label={"Add a New Job"} />
+      <NewResourceButton
+        label={"Add a New Job"}
+        handleClick={() => openJobModal()}
+      />
     </div>
   );
 };
