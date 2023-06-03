@@ -6,10 +6,15 @@ import Modal from "react-modal";
 import JobsTableTopper from "./jobtracker/jobsTableTopper";
 import JobsTable from "./jobtracker/jobsTable";
 import CreateJobForm from "./forms/createJobForm";
+import _ from "lodash";
 
 const JobTracker = ({ jobs, setJobs }) => {
   const [selectedJobIds, setSelectedJobIds] = useState([]);
   const [newJobModal, setNewJobModal] = useState(false);
+  const [sortColumn, setSortColumn] = useState({
+    path: "title",
+    order: "asc",
+  });
 
   const handleSelectJobChange = (jobId) => {
     if (selectedJobIds.includes(jobId)) {
@@ -43,6 +48,24 @@ const JobTracker = ({ jobs, setJobs }) => {
     setNewJobModal(false);
   };
 
+  const onSort = (sortColumn) => {
+    setSortColumn(sortColumn);
+  };
+
+  const getSortedJobs = (jobs) => {};
+
+  const sortedJobs = _.orderBy(
+    jobs,
+    [
+      (job) => {
+        if (typeof _.get(job, sortColumn.path) === "string")
+          return _.get(job, sortColumn.path).toLowerCase();
+        return _.get(job, sortColumn.path);
+      },
+    ],
+    [sortColumn.order]
+  );
+
   return (
     <div className="flex flex-col justify-center">
       <div className="bg-white w-full border border-gray p-2">
@@ -56,7 +79,9 @@ const JobTracker = ({ jobs, setJobs }) => {
         />
         {/* table content */}
         <JobsTable
-          jobs={jobs}
+          sortColumn={sortColumn}
+          onSort={onSort}
+          jobs={sortedJobs}
           onSelectJob={handleSelectJobChange}
           selectedJobIds={selectedJobIds}
         />

@@ -2,7 +2,13 @@ import TableHeader from "../common/tableHeader";
 import TableBody from "../common/tableBody";
 import _ from "lodash";
 
-const JobsTable = ({ jobs, onSelectJob, selectedJobIds }) => {
+const JobsTable = ({
+  jobs,
+  onSelectJob,
+  selectedJobIds,
+  sortColumn,
+  onSort,
+}) => {
   const columns = [
     {
       key: "select",
@@ -24,7 +30,7 @@ const JobsTable = ({ jobs, onSelectJob, selectedJobIds }) => {
 
   return (
     <table className="table-auto w-full">
-      <TableHeader columns={columns} />
+      <TableHeader columns={columns} onSort={onSort} sortColumn={sortColumn} />
       <TableBody columns={columns} data={jobs} />
     </table>
   );

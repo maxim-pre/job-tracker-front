@@ -3,7 +3,12 @@ import _ from "lodash";
 const TableBody = ({ data, columns }) => {
   const renderCell = (item, column) => {
     if (column.content) return column.content(item);
-    return _.get(item, column.path);
+    const content = _.get(item, column.path);
+    if (typeof content === "string") {
+      return content.charAt(0).toUpperCase() + content.slice(1);
+    } else {
+      return content;
+    }
   };
 
   const createKey = (item, column) => {
