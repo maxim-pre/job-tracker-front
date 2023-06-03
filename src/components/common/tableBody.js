@@ -15,7 +15,16 @@ const TableBody = ({ data, columns }) => {
       {data.map((item) => (
         <tr key={item.id}>
           {columns.map((col) => (
-            <td key={createKey(item, col)}>{renderCell(item, col)}</td>
+            <td
+              key={createKey(item, col)}
+              className={`${
+                col.content
+                  ? "border-t border-b border-r border-r-white border-gray"
+                  : "border border-gray"
+              } hover:bg-green hover:bg-opacity-20 text-sm text-darkgray py-3 px-4 whitespace-nowrap`}
+            >
+              {renderCell(item, col)}
+            </td>
           ))}
         </tr>
       ))}

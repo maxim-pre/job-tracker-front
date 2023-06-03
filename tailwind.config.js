@@ -10,6 +10,7 @@ module.exports = {
       error: "#cc0000",
       gray: "#e5e5e5",
       darkgray: "#6c757d",
+      lightgray: "#f8f9fa",
     },
   },
   plugins: [],

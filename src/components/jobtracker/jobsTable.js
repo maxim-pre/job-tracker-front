@@ -23,7 +23,7 @@ const JobsTable = ({ jobs, onSelectJob, selectedJobIds }) => {
   ];
 
   return (
-    <table className="w-full">
+    <table className="table-auto w-full">
       <TableHeader columns={columns} />
       <TableBody columns={columns} data={jobs} />
     </table>
