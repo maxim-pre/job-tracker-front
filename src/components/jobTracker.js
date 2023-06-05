@@ -6,11 +6,13 @@ import Modal from "react-modal";
 import JobsTableTopper from "./jobtracker/jobsTableTopper";
 import JobsTable from "./jobtracker/jobsTable";
 import CreateJobForm from "./forms/createJobForm";
+import JobListGroups from "./jobtracker/jobListGroups";
 import _ from "lodash";
 
 const JobTracker = ({ jobs, setJobs }) => {
   const [selectedJobIds, setSelectedJobIds] = useState([]);
   const [newJobModal, setNewJobModal] = useState(false);
+  const [listGroup, setListGroup] = useState("");
   const [sortColumn, setSortColumn] = useState({
     path: "title",
     order: "asc",
@@ -52,10 +54,16 @@ const JobTracker = ({ jobs, setJobs }) => {
     setSortColumn(sortColumn);
   };
 
-  const getSortedJobs = (jobs) => {};
+  const onSelectListGroup = (status) => {
+    setListGroup(status);
+  };
+
+  const filteredJobs = listGroup
+    ? jobs.filter((job) => job.status === listGroup)
+    : jobs;
 
   const sortedJobs = _.orderBy(
-    jobs,
+    filteredJobs,
     [
       (job) => {
         if (typeof _.get(job, sortColumn.path) === "string")
@@ -68,6 +76,13 @@ const JobTracker = ({ jobs, setJobs }) => {
 
   return (
     <div className="flex flex-col justify-center">
+      <div className="bg-white w-full border border-gray h-20 mb-2 flex py-2 px-1">
+        <JobListGroups
+          status={listGroup}
+          onSelectListGroup={onSelectListGroup}
+          jobs={jobs}
+        />
+      </div>
       <div className="bg-white w-full border border-gray p-2">
         {/* table topper */}
         <JobsTableTopper
