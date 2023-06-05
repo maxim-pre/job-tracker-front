@@ -4,7 +4,7 @@ const FormInput = ({ placeholder, type, value, onChange, errors, name }) => {
   return (
     <div>
       <input
-        className={`my-4 rounded-sm  focus:outline-0 border border-gray-400 py-2 px-1 focus:ring-1 focus:ring-gray-300 focus:ring-opacity-40 placeholder:text-sm text-sm w-full ${
+        className={`my-4 rounded-sm  focus:outline-0 border border-gray py-2 px-1 focus:ring-1 focus:ring-gray-300 focus:ring-opacity-40 placeholder:text-sm text-sm w-full ${
           (errors && errors[name]) || (errors && typeof errors === "string")
             ? "border-error ring-error"
             : ""

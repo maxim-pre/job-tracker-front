@@ -9,6 +9,7 @@ import EditJobDetailsForm from "./forms/editJobDetailsForm";
 import SalarySection from "./job/salarySection";
 import { updateJobStatusById } from "../lib/api/fetchCurrentUser";
 import { HiOutlinePencilAlt } from "react-icons/hi";
+import EditSalaryForm from "./forms/editSalaryForm";
 
 const Job = () => {
   const { id } = useParams();
@@ -83,7 +84,11 @@ const Job = () => {
         className="fixed inset-10 md:w-[50%] sm:w-[70%] mx-auto rounded-sm bg-white z-10 px-4 py-5 overflow-auto focus:outline-0"
         overlayClassName="fixed inset-0 bg-green bg-opacity-50 flex items-center justify-center"
       >
-        hello
+        <EditSalaryForm
+          closeModal={closeSalaryModal}
+          job={job}
+          setJob={setJob}
+        />
       </Modal>
     </div>
   );
