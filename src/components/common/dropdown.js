@@ -1,34 +1,27 @@
-import GenericButton from "../buttons/genericButton";
 import DropDownOption from "./dropdownOption";
 import { useState } from "react";
 
-const Dropdown = ({ label, icon, optionSelectFunction }) => {
+const Dropdown = ({
+  label,
+  icon,
+  optionSelectFunction,
+  button: Button,
+  options,
+}) => {
   const [open, setOpen] = useState(false);
-  const statuses = [
-    "Bookmarked",
-    "Applying",
-    "Applied",
-    "Interviewing",
-    "Negotiating",
-    "Accepted",
-  ];
   return (
     <div className="relative">
       <div>
-        <GenericButton
-          label={label}
-          icon={icon}
-          handleClick={() => setOpen(!open)}
-        />
+        <Button label={label} icon={icon} handleClick={() => setOpen(!open)} />
       </div>
       {open && (
         <div className="bg-white absolute bottom-0-0 flex flex-col shadow mt-1 text-xs">
-          {statuses.map((status) => {
+          {options.map((option) => {
             return (
               <DropDownOption
-                label={status}
+                label={option}
                 optionSelectFunction={optionSelectFunction}
-                key={status}
+                key={option}
               />
             );
           })}

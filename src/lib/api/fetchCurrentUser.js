@@ -11,4 +11,15 @@ const fetchCurrentUser = async () => {
   }
 };
 
-export default fetchCurrentUser;
+const updateJobStatusById = async (id, status) => {
+  try {
+    const response = await authAxios.put(`${apiRoute}jobs/${id}`, {
+      status: status,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { fetchCurrentUser, updateJobStatusById };

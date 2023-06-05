@@ -34,6 +34,15 @@ const JobsTableTopper = ({
                 label={"status"}
                 icon={HiOutlinePencilAlt}
                 optionSelectFunction={updateStatusOfSelectedIds}
+                button={GenericButton}
+                options={[
+                  "Bookmarked",
+                  "Applying",
+                  "Applied",
+                  "Interviewing",
+                  "Negotiating",
+                  "Accepted",
+                ]}
               />
             </div>
           </div>
