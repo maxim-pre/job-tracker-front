@@ -7,11 +7,11 @@ const JobListGroup = ({ status, currentStatus, onSelectListGroup, jobs }) => {
   return (
     <div
       className={`border border-gray bg-white flex text-sm items-center justify-center px-1 flex-1 mx-1 rounded flex-col ${
-        currentStatus === status ? "border-green" : ""
+        currentStatus === status.toLowerCase() ? "border-green" : ""
       }`}
       onClick={() => onSelectListGroup(status)}
     >
-      <div>{getNumberOfJobsByStatus(status)}</div>
+      <div>{getNumberOfJobsByStatus(status.toLowerCase())}</div>
       <h2>{status}</h2>
     </div>
   );

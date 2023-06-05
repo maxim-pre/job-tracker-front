@@ -2,6 +2,7 @@ import GenericButton from "../buttons/genericButton";
 import DeleteButton from "../buttons/deleteButton";
 import NewResourceButton from "../buttons/newResourceButton";
 import { HiOutlinePencilAlt } from "react-icons/hi";
+import Dropdown from "../common/dropdown";
 
 const JobsTableTopper = ({
   handleSelectAllJobs,
@@ -9,6 +10,7 @@ const JobsTableTopper = ({
   selectedJobIds,
   jobs,
   openJobModal,
+  updateStatusOfSelectedIds,
 }) => {
   return (
     <div className="flex justify-between items-center py-2 px-1">
@@ -28,7 +30,11 @@ const JobsTableTopper = ({
               handleClick={() => handleDeleteSelectedJobs(selectedJobIds)}
             />
             <div className="ml-2">
-              <GenericButton icon={HiOutlinePencilAlt} label={"Status"} />
+              <Dropdown
+                label={"status"}
+                icon={HiOutlinePencilAlt}
+                optionSelectFunction={updateStatusOfSelectedIds}
+              />
             </div>
           </div>
         )}

@@ -26,6 +26,30 @@ const JobTracker = ({ jobs, setJobs }) => {
     }
   };
 
+  const updateJobStatusById = async (id, status) => {
+    try {
+      const response = await authAxios.put(`${apiRoute}jobs/${id}`, {
+        status: status,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateStatusOfSelectedIds = (status) => {
+    selectedJobIds.forEach((id) => {
+      updateJobStatusById(id, status);
+    });
+    const updatedJobs = jobs.map((job) => {
+      if (selectedJobIds.includes(job.id)) {
+        job.status = status;
+      }
+      return job;
+    });
+    setJobs(updatedJobs);
+    setSelectedJobIds([]);
+  };
+
   const handleSelectAllJobs = () => {
     if (selectedJobIds.length > 0) {
       setSelectedJobIds([]);
@@ -55,7 +79,7 @@ const JobTracker = ({ jobs, setJobs }) => {
   };
 
   const onSelectListGroup = (status) => {
-    setListGroup(status);
+    setListGroup(status.toLowerCase());
   };
 
   const filteredJobs = listGroup
@@ -86,6 +110,7 @@ const JobTracker = ({ jobs, setJobs }) => {
       <div className="bg-white w-full border border-gray p-2">
         {/* table topper */}
         <JobsTableTopper
+          updateStatusOfSelectedIds={updateStatusOfSelectedIds}
           handleSelectAllJobs={handleSelectAllJobs}
           handleDeleteSelectedJobs={handleDeleteSelectedJobs}
           openJobModal={() => setNewJobModal(true)}

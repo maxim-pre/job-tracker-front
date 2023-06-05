@@ -1,43 +1,26 @@
 import JobListGroup from "./jobListGroup";
 const JobListGroups = ({ status, onSelectListGroup, jobs }) => {
+  const statuses = [
+    "Bookmarked",
+    "Applying",
+    "Applied",
+    "Interviewing",
+    "Negotiating",
+    "Accepted",
+  ];
   return (
     <>
-      <JobListGroup
-        status={"bookmarked"}
-        currentStatus={status}
-        onSelectListGroup={onSelectListGroup}
-        jobs={jobs}
-      />
-      <JobListGroup
-        status={"applying"}
-        currentStatus={status}
-        onSelectListGroup={onSelectListGroup}
-        jobs={jobs}
-      />
-      <JobListGroup
-        status={"applied"}
-        currentStatus={status}
-        onSelectListGroup={onSelectListGroup}
-        jobs={jobs}
-      />
-      <JobListGroup
-        status={"interviewing"}
-        currentStatus={status}
-        onSelectListGroup={onSelectListGroup}
-        jobs={jobs}
-      />
-      <JobListGroup
-        status={"negotiating"}
-        currentStatus={status}
-        onSelectListGroup={onSelectListGroup}
-        jobs={jobs}
-      />
-      <JobListGroup
-        status={"Accepted"}
-        currentStatus={status}
-        onSelectListGroup={onSelectListGroup}
-        jobs={jobs}
-      />
+      {statuses.map((s) => {
+        return (
+          <JobListGroup
+            key={s}
+            status={s}
+            currentStatus={status}
+            onSelectListGroup={onSelectListGroup}
+            jobs={jobs}
+          />
+        );
+      })}
     </>
   );
 };
