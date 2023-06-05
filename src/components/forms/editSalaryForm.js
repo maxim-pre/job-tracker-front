@@ -6,20 +6,21 @@ import FormInput from "../common/formInput";
 import FormLabel from "../common/formLabel";
 import GenericButton from "../buttons/genericButton";
 const EditSalaryForm = ({ closeModal, job, setJob }) => {
-  const [maxSalary, setMaxSalary] = useState("");
-  const [minSalary, setMinSalary] = useState("");
-  const [payPeriod, setPayPeriod] = useState(null);
+  const [maxSalary, setMaxSalary] = useState(job.max_salary);
+  const [minSalary, setMinSalary] = useState(job.min_salary);
+  const [payPeriod, setPayPeriod] = useState(job.pay_period);
   const [errors, setErrors] = useState("");
 
   const submit = async () => {
     const data = {
       max_salary: maxSalary,
       min_salary: minSalary,
-      pay_period: payPeriod,
+      pay_period: payPeriod.value,
     };
 
     try {
       const response = await authAxios.put(`${apiRoute}/jobs/${job.id}`, data);
+      console.log(response.data.data);
       setJob(response.data.data);
       closeModal();
     } catch (error) {

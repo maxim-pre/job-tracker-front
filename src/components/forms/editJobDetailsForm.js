@@ -4,7 +4,6 @@ import apiRoute from "../../lib/apiRoute";
 import FormInput from "../common/formInput";
 import FormLabel from "../common/formLabel";
 import GenericButton from "../buttons/genericButton";
-import FormError from "../common/formError";
 
 const EditJobDetailsForm = ({ closeModal, job, setJob }) => {
   const [title, setTitle] = useState(job.title);
