@@ -16,6 +16,7 @@ import JobTracker from "./components/jobTracker";
 import Contacts from "./components/contacts";
 import Account from "./components/account";
 import Logout from "./components/logout";
+import Job from "./components/job";
 function App() {
   const [currentUser, setCurrentUser] = useState("");
   const [nav, setNav] = useState(false);
@@ -84,6 +85,7 @@ function App() {
               path={"/jobtracker"}
               element={<JobTracker jobs={jobs} setJobs={setJobs} />}
             />
+            <Route path={"/jobtracker/:id"} element={<Job />} />
             <Route path={"/contacts"} element={<Contacts />} />
             <Route path={"/logout"} element={<Logout />} />
           </Routes>

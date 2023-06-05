@@ -1,5 +1,6 @@
 import TableHeader from "../common/tableHeader";
 import TableBody from "../common/tableBody";
+import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 
 const JobsTable = ({
@@ -9,6 +10,11 @@ const JobsTable = ({
   sortColumn,
   onSort,
 }) => {
+  const navigate = useNavigate();
+  const navigateToJob = (job) => {
+    navigate(`/jobtracker/${job.id}`);
+  };
+
   const columns = [
     {
       key: "select",
@@ -20,12 +26,12 @@ const JobsTable = ({
         />
       ),
     },
-    { path: "title", label: "Title" },
-    { path: "company", label: "Company" },
-    { path: "location", label: "Location" },
-    { path: "max_salary", label: "Max Salary" },
-    { path: "status", label: "Status" },
-    { path: "date_applied", label: "Date Applied" },
+    { path: "title", label: "Title", link: navigateToJob },
+    { path: "company", label: "Company", link: navigateToJob },
+    { path: "location", label: "Location", link: navigateToJob },
+    { path: "max_salary", label: "Max Salary", link: navigateToJob },
+    { path: "status", label: "Status", link: navigateToJob },
+    { path: "date_applied", label: "Date Applied", link: navigateToJob },
   ];
 
   return (
