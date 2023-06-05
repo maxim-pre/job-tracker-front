@@ -63,7 +63,7 @@ function App() {
     );
   } else {
     return (
-      <div className="flex flex-col min-h-screen md:flex-row App" id="app">
+      <div className="flex flex-col min-h-screen md:flex-row" id="app">
         <MobileNavBar nav={nav} setNav={setNav} />
         {nav && <MobileNavMenu setNav={setNav} currentUser={currentUser} />}
         {/* side Nav */}
