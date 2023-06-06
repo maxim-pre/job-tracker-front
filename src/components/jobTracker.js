@@ -99,7 +99,7 @@ const JobTracker = ({ jobs, setJobs }) => {
   );
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center max-h-screen p-4 ">
       <div className="bg-white w-full border border-gray h-20 mb-2 flex py-2 px-1">
         <JobListGroups
           status={listGroup}

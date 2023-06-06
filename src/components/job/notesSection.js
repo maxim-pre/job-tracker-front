@@ -2,11 +2,24 @@ import { GrNotes } from "react-icons/gr";
 import { useState } from "react";
 import NewNoteForm from "../forms/newNoteForm";
 import NotesContainer from "./notesContainer";
+import authAxios from "../../lib/authAxios";
+import apiRoute from "../../lib/apiRoute";
 
 const NotesSection = ({ job, notes, setNotes }) => {
   const [newNote, setNewNote] = useState(false);
   const closeForm = () => {
     setNewNote(false);
+  };
+
+  const handleDelete = async (noteId) => {
+    try {
+      const response = await authAxios.delete(
+        `${apiRoute}jobs/${job.id}/notes/${noteId}`
+      );
+      setNotes(notes.filter((note) => note.id !== noteId));
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="w-full flex flex-col">
@@ -22,18 +35,23 @@ const NotesSection = ({ job, notes, setNotes }) => {
           New
         </button>
       </div>
-      <div className="px-4 mb-4">
-        {newNote ? (
+      {newNote ? (
+        <div className="px-4 mb-4">
           <NewNoteForm
             job_id={job.id}
             closeForm={closeForm}
             notes={notes}
             setNotes={setNotes}
           />
-        ) : (
-          <NotesContainer notes={notes} setNotes={setNotes} />
-        )}
-      </div>
+        </div>
+      ) : (
+        <NotesContainer
+          notes={notes}
+          setNotes={setNotes}
+          handleDelete={handleDelete}
+          job={job}
+        />
+      )}
     </div>
   );
 };

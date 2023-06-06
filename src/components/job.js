@@ -58,7 +58,7 @@ const Job = () => {
     return <div>loading</div>;
   }
   return (
-    <div className="max-h-screen flex flex-col">
+    <div className="max-h-screen py-4 px-4 flex flex-col">
       {/* header section */}
       <div className="bg-white border border-gray flex flex-col px-4 py-4 items-center">
         <div className="flex justify-between w-full">

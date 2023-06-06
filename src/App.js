@@ -63,13 +63,17 @@ function App() {
     );
   } else {
     return (
-      <div className="flex flex-col min-h-screen md:flex-row" id="app">
+      <div className="flex flex-col max-h-screen md:flex-row">
         <MobileNavBar nav={nav} setNav={setNav} />
         {nav && <MobileNavMenu setNav={setNav} currentUser={currentUser} />}
         {/* side Nav */}
         <Nav currentUser={currentUser} />
         {/* content */}
-        <div className={`${nav ? "hidden" : "flex-1 p-4 bg-offwhite"}`}>
+        <div
+          className={`${
+            nav ? "hidden" : "flex-1 bg-offwhite box-border min-h-screen"
+          }`}
+        >
           <Routes>
             <Route path={"/"} element={<Dashboard />} />
             <Route
