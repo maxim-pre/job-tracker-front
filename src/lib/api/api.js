@@ -12,10 +12,14 @@ const fetchCurrentUser = async () => {
 };
 
 const updateJobStatusById = async (id, status) => {
+  const data = { status: status };
+
+  if (status === "applied") {
+    data["date_applied"] = new Date();
+  }
+
   try {
-    const response = await authAxios.put(`${apiRoute}jobs/${id}`, {
-      status: status,
-    });
+    const response = await authAxios.put(`${apiRoute}jobs/${id}`, data);
     return response.data;
   } catch (error) {
     console.log(error);

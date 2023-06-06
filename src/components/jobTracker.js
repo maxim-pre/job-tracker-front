@@ -1,5 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import { updateJobStatusById } from "../lib/api/api";
 import authAxios from "../lib/authAxios";
 import apiRoute from "../lib/apiRoute";
 import Modal from "react-modal";
@@ -26,18 +27,8 @@ const JobTracker = ({ jobs, setJobs }) => {
     }
   };
 
-  const updateJobStatusById = async (id, status) => {
-    try {
-      const response = await authAxios.put(`${apiRoute}jobs/${id}`, {
-        status: status,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const updateStatusOfSelectedIds = (status) => {
-    selectedJobIds.forEach((id) => {
+    selectedJobIds.forEach(async (id) => {
       updateJobStatusById(id, status);
     });
     const updatedJobs = jobs.map((job) => {

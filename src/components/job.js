@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { updateJobStatusById } from "../lib/api/fetchCurrentUser";
+import { updateJobStatusById } from "../lib/api/api";
 import Modal from "react-modal";
 import apiRoute from "../lib/apiRoute";
 import authAxios from "../lib/authAxios";
