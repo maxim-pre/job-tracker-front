@@ -85,8 +85,10 @@ const EditSalaryForm = ({ closeModal, job, setJob }) => {
           />
         </div>
       </div>
+      <FormLabel inputId={"pay_period"} label={"Period between payments"} />
 
       <Select
+        name="pay_period"
         options={options}
         value={payPeriod}
         onChange={(value) => setPayPeriod(value)}
