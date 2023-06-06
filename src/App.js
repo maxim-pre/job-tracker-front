@@ -75,7 +75,16 @@ function App() {
           }`}
         >
           <Routes>
-            <Route path={"/"} element={<Dashboard />} />
+            <Route
+              path={"/"}
+              element={
+                <Dashboard
+                  jobs={jobs}
+                  currentUser={currentUser}
+                  setCurrentUser={setCurrentUser}
+                />
+              }
+            />
             <Route
               path={"/account"}
               element={
