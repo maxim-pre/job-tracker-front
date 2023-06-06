@@ -17,7 +17,7 @@ const JobsTableTopper = ({
       <div className="flex">
         <input
           type="checkbox"
-          checked={selectedJobIds.length === jobs.length}
+          checked={selectedJobIds.length === jobs.length && jobs.length > 0}
           onChange={() => handleSelectAllJobs()}
         />
         <p className="px-2 text-sm text-darkgray">
