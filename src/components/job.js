@@ -11,6 +11,7 @@ import EditSalaryForm from "./forms/editSalaryForm";
 import JobDetailsSection from "./job/jobDetailsSection";
 import CollapseableSection from "./job/collapseableSection";
 import JobDatesForm from "./forms/jobDatesForm";
+import JobDescriptionSection from "./job/jobDescriptionSection";
 const Job = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
@@ -60,7 +61,7 @@ const Job = () => {
         </div>
       </div>
       {/* main section */}
-      <div className=" flex bg-white border border-gray mt-2">
+      <div className=" flex bg-white border border-gray mt-2 overflow-y-auto">
         <div className="grid sm:grid-cols-5 w-full">
           <div className="col-span-3">
             <CollapseableSection
@@ -68,7 +69,10 @@ const Job = () => {
               component={<JobDatesForm job={job} setJob={setJob} />}
             />
             <CollapseableSection label={"InterView Tracking"} />
-            <CollapseableSection label={"Job Description"} />
+            <CollapseableSection
+              label={"Job Description"}
+              component={<JobDescriptionSection job={job} setJob={setJob} />}
+            />
           </div>
           <div className="col-span-2">world</div>
         </div>

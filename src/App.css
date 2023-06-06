@@ -28,6 +28,65 @@
   color: #61dafb;
 }
 
+.rendered-content {
+  /* Set font family and size */
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+
+  /* Set line height */
+  line-height: 1.5;
+
+  /* Set default text color */
+  color: #333;
+}
+
+/* Set heading styles */
+.rendered-content h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.rendered-content h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.rendered-content h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* Set paragraph styles */
+.rendered-content p {
+  margin-bottom: 16px;
+}
+
+/* Set list styles */
+.rendered-content ul,
+.rendered-content ol {
+  margin-bottom: 16px;
+  padding-left: 24px;
+}
+
+.rendered-content li {
+  margin-bottom: 8px;
+}
+
+.rendered-content ul li::before {
+  content: "\2022"; /* Bullet point character */
+  color: #333;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.rendered-content ol li {
+  list-style-type: decimal;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
