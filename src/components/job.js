@@ -12,11 +12,13 @@ import JobDetailsSection from "./job/jobDetailsSection";
 import CollapseableSection from "./job/collapseableSection";
 import JobDatesForm from "./forms/jobDatesForm";
 import JobDescriptionSection from "./job/jobDescriptionSection";
+import NotesSection from "./job/notesSection";
 const Job = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const [jobDetailsModal, setJobDetailsModal] = useState(false);
   const [jobSalaryModal, setJobSalaryModal] = useState(false);
+  const [notes, setNotes] = useState(false);
 
   const fetchJob = async () => {
     try {
@@ -26,8 +28,18 @@ const Job = () => {
       console.log(error);
     }
   };
+
+  const fetchNotes = async () => {
+    try {
+      const response = await authAxios.get(`${apiRoute}/jobs/${id}/notes`);
+      setNotes(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     fetchJob();
+    fetchNotes();
   }, [id]);
 
   const handleUpdateStatus = async (status, id) => {
@@ -42,7 +54,7 @@ const Job = () => {
     setJobSalaryModal(false);
   };
 
-  if (!job) {
+  if (!job || !notes) {
     return <div>loading</div>;
   }
   return (
@@ -74,7 +86,9 @@ const Job = () => {
               component={<JobDescriptionSection job={job} setJob={setJob} />}
             />
           </div>
-          <div className="col-span-2">world</div>
+          <div className="col-span-2">
+            <NotesSection job={job} notes={notes} setNotes={setNotes} />
+          </div>
         </div>
       </div>
       <Modal
