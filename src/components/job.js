@@ -63,7 +63,10 @@ const Job = () => {
       <div className=" flex bg-white border border-gray mt-2">
         <div className="grid sm:grid-cols-5 w-full">
           <div className="col-span-3">
-            <CollapseableSection label={"Dates"} component={<JobDatesForm />} />
+            <CollapseableSection
+              label={"Dates"}
+              component={<JobDatesForm job={job} setJob={setJob} />}
+            />
             <CollapseableSection label={"InterView Tracking"} />
             <CollapseableSection label={"Job Description"} />
           </div>
