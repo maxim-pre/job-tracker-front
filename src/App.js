@@ -98,7 +98,10 @@ function App() {
               path={"/jobtracker"}
               element={<JobTracker jobs={jobs} setJobs={setJobs} />}
             />
-            <Route path={"/jobtracker/:id"} element={<Job />} />
+            <Route
+              path={"/jobtracker/:id"}
+              element={<Job jobs={jobs} setJobs={setJobs} />}
+            />
             <Route path={"/contacts"} element={<Contacts />} />
             <Route path={"/logout"} element={<Logout />} />
           </Routes>

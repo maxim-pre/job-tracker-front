@@ -3,15 +3,12 @@ import convertDatetimeToString from "../../lib/dateTimeToString";
 
 const JobDetailsSection = ({ job, openModal }) => {
   const renderCompanyAndLocation = () => {
-    if (job.title && job.company)
-      return (
-        <h1 className="font-bold">
-          {job.company} -<span className="font-normal"> {job.location}</span>
-        </h1>
-      );
-    if (job.title) return <h1 className="">{job.title}</h1>;
-    if (job.company) return <h1 className="font-bold">{job.compnay}</h1>;
-    return <h1></h1>;
+    return (
+      <h1 className="font-bold">
+        {job.company}{" "}
+        {job.location && <span className="font-normal"> - {job.location}</span>}
+      </h1>
+    );
   };
 
   return (

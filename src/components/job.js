@@ -13,7 +13,7 @@ import CollapseableSection from "./job/collapseableSection";
 import JobDatesForm from "./forms/jobDatesForm";
 import JobDescriptionSection from "./job/jobDescriptionSection";
 import NotesSection from "./job/notesSection";
-const Job = () => {
+const Job = ({ jobs, setJobs }) => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const [jobDetailsModal, setJobDetailsModal] = useState(false);
@@ -41,6 +41,22 @@ const Job = () => {
     fetchJob();
     fetchNotes();
   }, [id]);
+
+  const updateJobs = (updatedJob) => {
+    const updatedJobs = jobs.map((j) => {
+      if (j.id === updatedJob.id) {
+        return updatedJob;
+      }
+      return j;
+    });
+    setJobs(updatedJobs);
+  };
+
+  useEffect(() => {
+    if (job) {
+      updateJobs(job);
+    }
+  }, [job]);
 
   const handleUpdateStatus = async (status, id) => {
     const response = await updateJobStatusById(id, status);

@@ -22,6 +22,7 @@ const ObjectivesBox = ({ currentUser, openModal }) => {
           }
           label={"Target Title"}
           icon={FiTarget}
+          color="#03045e"
         />
         <ObjectiveComponent
           content={
@@ -31,11 +32,13 @@ const ObjectivesBox = ({ currentUser, openModal }) => {
           }
           label={"Application Goal"}
           icon={MdWork}
+          color=""
         />
         <ObjectiveComponent
           content={`£${currentUser.salary_min} - £${currentUser.salary_max}`}
           label={"Target Salary"}
           icon={FaPoundSign}
+          color="#118C4F"
         />
       </div>
     </div>
