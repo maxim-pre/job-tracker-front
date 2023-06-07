@@ -32,12 +32,11 @@ const ThisWeekSection = ({ jobs, currentUser }) => {
     });
   });
 
-  console.log(data);
   return (
-    <div className="bg-white border border-gray p-4 h-40 flex-grow">
-      <h1 className=" font-bold mb-4 h">Progress to Application Goal</h1>
+    <div className="bg-white border border-gray p-4 flex-grow ">
+      <h1 className=" font-bold mb-4 text-2xl">This Week</h1>
 
-      <div className="h-[90%]">
+      <div className="h-[80%]">
         <TinyLineChart data={data} minYValue={currentUser.application_goal} />
       </div>
     </div>

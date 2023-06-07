@@ -9,7 +9,6 @@ import {
 } from "recharts";
 
 const TinyLineChart = ({ data, minYValue }) => {
-  console.log(minYValue);
   const maxApplications = Math.max(...data.map((item) => item.applications));
   const maxYValue = Math.max(minYValue, maxApplications);
 
