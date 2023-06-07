@@ -3,13 +3,15 @@ import EditUserGoalsForm from "./forms/editUserGoalsForm";
 import Modal from "react-modal";
 import { useState } from "react";
 import SavedJobs from "./dashboard/savedJobsSection";
+import ThisWeekSection from "./dashboard/thisWeekSection";
 const Dashboard = ({ jobs, currentUser, setCurrentUser }) => {
   const [editGoalsModal, setEditGoalsModal] = useState(false);
   const closeEditGoalsModal = () => {
     setEditGoalsModal(false);
   };
+  console.log(jobs);
   return (
-    <div className="max-h-screen p-4 grid sm:grid-cols-5 gap-8 h-full">
+    <div className="max-h-screen p-4 grid sm:grid-cols-5 gap-4 h-full">
       <div className="col-span-3 flex flex-col">
         {/* objectives box */}
         <ObjectivesBox
@@ -17,6 +19,10 @@ const Dashboard = ({ jobs, currentUser, setCurrentUser }) => {
           openModal={() => setEditGoalsModal(true)}
         />
         <SavedJobs jobs={jobs} />
+      </div>
+      <div className="col-span-2 flex flex-col">
+        <ThisWeekSection jobs={jobs} currentUser={currentUser} />
+        <div className="flex-grow mt-4"></div>
       </div>
       <Modal
         isOpen={editGoalsModal}

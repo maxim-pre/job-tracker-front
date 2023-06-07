@@ -25,8 +25,6 @@ const TinyBarChart = ({ data }) => {
     marginTop: "20px", // Add top margin
   };
 
-  console.log(data);
-
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart data={data}>
