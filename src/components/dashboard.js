@@ -10,8 +10,9 @@ const Dashboard = ({ jobs, currentUser, setCurrentUser }) => {
   const closeEditGoalsModal = () => {
     setEditGoalsModal(false);
   };
+  console.log(jobs);
   return (
-    <div className="max-h-screen p-4 grid sm:grid-cols-5 gap-4 h-ful overflow-y-auto">
+    <div className="max-h-screen p-4 grid sm:grid-cols-5 gap-4 h-full overflow-y-auto">
       <div className="col-span-3 flex flex-col">
         {/* objectives box */}
         <ObjectivesBox
