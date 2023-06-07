@@ -6,7 +6,7 @@ import ProfileIcon from "../common/profileIcon";
 
 const MobileNavMenu = ({ setNav, currentUser }) => {
   return (
-    <div className=" w-full flex-grow bg-green z-10 px-4 flex flex-col justify-between">
+    <div className=" w-full bg-green z-10 px-4 flex flex-col justify-between h-screen">
       <div
         onClick={() => {
           setNav(false);
@@ -27,7 +27,7 @@ const MobileNavMenu = ({ setNav, currentUser }) => {
           open={true}
         />
       </div>
-      <div className="">
+      <div className="" onClick={() => setNav(false)}>
         <hr className="mx-1 text-white"></hr>
         <NavLink
           url={"/account"}

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { updateJobStatusById } from "../lib/api/api";
 import GenericButton from "./buttons/genericButton";
 import { HiOutlinePencilAlt } from "react-icons/hi";
-
 import Dropdown from "./common/dropdown";
 import Modal from "react-modal";
 import apiRoute from "../lib/apiRoute";
