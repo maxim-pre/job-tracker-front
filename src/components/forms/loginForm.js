@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import authAxios from "../../lib/authAxios";
 import apiRoute from "../../lib/apiRoute";
 import FormInput from "../common/formInput";
 import FormError from "../common/formError";
+import axios from "axios";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,9 +14,8 @@ const LoginForm = () => {
       email: email,
       password: password,
     };
-    localStorage.removeItem("token");
     try {
-      const response = await authAxios.post(`${apiRoute}login`, { user: user });
+      const response = await axios.post(`${apiRoute}login`, { user: user });
       console.log(response);
       localStorage.setItem("token", response.headers.authorization);
       setError("");

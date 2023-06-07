@@ -5,13 +5,15 @@ import { MdWork } from "react-icons/md";
 
 import ObjectiveComponent from "./objectiveComponent";
 
-const ObjectivesBox = ({ currentUser }) => {
-  console.log(currentUser);
+const ObjectivesBox = ({ currentUser, openModal }) => {
   return (
     <div className="border bg-white border-gray p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">My Job Search Goals</h1>
-        <HiOutlinePencilAlt />
+        <HiOutlinePencilAlt
+          onClick={() => openModal()}
+          className="cursor-pointer"
+        />
       </div>
       <div className="flex justify-between items-center mt-4">
         <ObjectiveComponent
