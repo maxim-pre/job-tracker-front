@@ -2,20 +2,21 @@ import ObjectivesBox from "./dashboard/objectivesBox";
 import EditUserGoalsForm from "./forms/editUserGoalsForm";
 import Modal from "react-modal";
 import { useState } from "react";
-
+import SavedJobs from "./dashboard/savedJobsSection";
 const Dashboard = ({ jobs, currentUser, setCurrentUser }) => {
   const [editGoalsModal, setEditGoalsModal] = useState(false);
   const closeEditGoalsModal = () => {
     setEditGoalsModal(false);
   };
   return (
-    <div className="max-h-screen p-4 grid sm:grid-cols-5 gap-8">
-      <div className="col-span-3">
+    <div className="max-h-screen p-4 grid sm:grid-cols-5 gap-8 h-full">
+      <div className="col-span-3 flex flex-col">
         {/* objectives box */}
         <ObjectivesBox
           currentUser={currentUser}
           openModal={() => setEditGoalsModal(true)}
         />
+        <SavedJobs jobs={jobs} />
       </div>
       <Modal
         isOpen={editGoalsModal}
