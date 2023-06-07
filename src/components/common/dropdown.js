@@ -1,3 +1,4 @@
+import { set } from "lodash";
 import DropDownOption from "./dropdownOption";
 import { useState } from "react";
 
@@ -9,6 +10,7 @@ const Dropdown = ({
   options,
 }) => {
   const [open, setOpen] = useState(false);
+  const closeDropDown = () => setOpen(false);
   return (
     <div className="relative">
       <div>
@@ -22,6 +24,7 @@ const Dropdown = ({
                 label={option}
                 optionSelectFunction={optionSelectFunction}
                 key={option}
+                close={closeDropDown}
               />
             );
           })}

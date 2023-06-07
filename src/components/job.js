@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { updateJobStatusById } from "../lib/api/api";
+import GenericButton from "./buttons/genericButton";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+
+import Dropdown from "./common/dropdown";
 import Modal from "react-modal";
 import apiRoute from "../lib/apiRoute";
 import authAxios from "../lib/authAxios";
@@ -13,6 +17,7 @@ import CollapseableSection from "./job/collapseableSection";
 import JobDatesForm from "./forms/jobDatesForm";
 import JobDescriptionSection from "./job/jobDescriptionSection";
 import NotesSection from "./job/notesSection";
+import { toast } from "react-toastify";
 const Job = ({ jobs, setJobs }) => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
@@ -58,8 +63,8 @@ const Job = ({ jobs, setJobs }) => {
     }
   }, [job]);
 
-  const handleUpdateStatus = async (status, id) => {
-    const response = await updateJobStatusById(id, status);
+  const handleUpdateStatus = async (status) => {
+    const response = await updateJobStatusById(job.id, status);
     setJob(response.data);
   };
 
@@ -74,7 +79,7 @@ const Job = ({ jobs, setJobs }) => {
     return <div>loading</div>;
   }
   return (
-    <div className="max-h-screen py-4 px-4 flex flex-col">
+    <div className="max-h-screen py-4 px-4 flex flex-col w-full">
       {/* header section */}
       <div className="bg-white border border-gray flex flex-col px-4 py-4 items-center">
         <div className="flex justify-between w-full">
@@ -84,13 +89,32 @@ const Job = ({ jobs, setJobs }) => {
           />
           <SalarySection job={job} openModal={() => setJobSalaryModal(true)} />
         </div>
-        <div className="flex w-full my-4">
+        <div className="hidden sm:flex w-full my-4">
           <StatusTimeLine job={job} handleClick={handleUpdateStatus} />
+        </div>
+        <div className="flex sm:hidden w-full my-4">
+          <Dropdown
+            label={"status"}
+            icon={HiOutlinePencilAlt}
+            optionSelectFunction={(status) => {
+              handleUpdateStatus(status);
+              toast.success("status updated");
+            }}
+            button={GenericButton}
+            options={[
+              "Bookmarked",
+              "Applying",
+              "Applied",
+              "Interviewing",
+              "Negotiating",
+              "Accepted",
+            ]}
+          />
         </div>
       </div>
       {/* main section */}
       <div className=" flex bg-white border border-gray mt-2 overflow-y-auto">
-        <div className="grid sm:grid-cols-5 w-full">
+        <div className="flex flex-col sm:grid sm:grid-cols-5  w-full">
           <div className="col-span-3">
             <CollapseableSection
               label={"Dates"}

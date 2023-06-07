@@ -4,13 +4,13 @@ const StatusBox = ({ label, type, job, handleClick }) => {
   let classname;
   if (type === "completed") {
     classname = "text-white bg-green border-green";
-  } else if (type == "current") {
+  } else if (type === "current") {
     classname = " bg-lightgreen border-lightgreen";
   }
   return (
     <div
       className={`border border-gray  rounded px-6 py-1 ${classname} cursor-pointer`}
-      onClick={() => handleClick(label.toLowerCase(), job.id)}
+      onClick={() => handleClick(label.toLowerCase())}
     >
       {label}
     </div>
