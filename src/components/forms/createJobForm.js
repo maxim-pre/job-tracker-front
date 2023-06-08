@@ -84,10 +84,10 @@ const CreateJobForm = ({ closeModal, setJobs, jobs }) => {
           theme="snow"
           value={description}
           onChange={(value) => setDescription(value)}
-          className="h-60 mt-4"
+          className="mt-4"
         />
       </div>
-      <div className="flex justify-end mt-14">
+      <div className="flex justify-end mt-4">
         <GenericButton label={"Cancel"} handleClick={closeModal} />
         <button
           type="submit"
