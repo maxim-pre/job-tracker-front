@@ -9,6 +9,10 @@ import JobsTable from "./jobtracker/jobsTable";
 import CreateJobForm from "./forms/createJobForm";
 import JobListGroups from "./jobtracker/jobListGroups";
 import _ from "lodash";
+import { AiOutlineDown } from "react-icons/ai";
+
+import Dropdown from "./common/dropdown";
+import GenericButton from "./buttons/genericButton";
 
 const JobTracker = ({ jobs, setJobs }) => {
   const [selectedJobIds, setSelectedJobIds] = useState([]);
@@ -73,9 +77,10 @@ const JobTracker = ({ jobs, setJobs }) => {
     setListGroup(status.toLowerCase());
   };
 
-  const filteredJobs = listGroup
-    ? jobs.filter((job) => job.status === listGroup)
-    : jobs;
+  const filteredJobs =
+    listGroup && listGroup !== "show all"
+      ? jobs.filter((job) => job.status === listGroup)
+      : jobs;
 
   const sortedJobs = _.orderBy(
     filteredJobs,
@@ -91,7 +96,7 @@ const JobTracker = ({ jobs, setJobs }) => {
 
   return (
     <div className="flex flex-col justify-center max-h-screen p-4 ">
-      <div className="bg-white w-full border border-gray h-20 mb-2 flex py-2 px-1">
+      <div className="bg-white w-full border border-gray h-20 mb-2 hidden md:flex py-2 px-1 ">
         <JobListGroups
           status={listGroup}
           onSelectListGroup={onSelectListGroup}
@@ -99,6 +104,23 @@ const JobTracker = ({ jobs, setJobs }) => {
         />
       </div>
       <div className="bg-white w-full border border-gray p-2">
+        <div className="flex md:hidden">
+          <Dropdown
+            label={"Filter by Status"}
+            icon={AiOutlineDown}
+            optionSelectFunction={onSelectListGroup}
+            button={GenericButton}
+            options={[
+              "Show All",
+              "Bookmarked",
+              "Applying",
+              "Applied",
+              "Interviewing",
+              "Negotiating",
+              "Accepted",
+            ]}
+          />
+        </div>
         {/* table topper */}
         <JobsTableTopper
           updateStatusOfSelectedIds={updateStatusOfSelectedIds}
@@ -109,13 +131,15 @@ const JobTracker = ({ jobs, setJobs }) => {
           selectedJobIds={selectedJobIds}
         />
         {/* table content */}
-        <JobsTable
-          sortColumn={sortColumn}
-          onSort={onSort}
-          jobs={sortedJobs}
-          onSelectJob={handleSelectJobChange}
-          selectedJobIds={selectedJobIds}
-        />
+        <div className="w-full overflow-x-auto">
+          <JobsTable
+            sortColumn={sortColumn}
+            onSort={onSort}
+            jobs={sortedJobs}
+            onSelectJob={handleSelectJobChange}
+            selectedJobIds={selectedJobIds}
+          />
+        </div>
       </div>
       <Modal
         isOpen={newJobModal}
