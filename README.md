@@ -1,6 +1,25 @@
 # Job tracker
 
-Job tracker is an application thats designed to help people organise, manage and track their job applications throughout the hiring process. It provides centralized platform to keep all job-related information organized and easily accessible.
+Job tracker is an application that's designed to help people organise, manage and track their job applications throughout the hiring process. It provides centralized platform to keep all job-related information organized and easily accessible. This is a Full-Stack application using a Rails API with a React Front-End and was built in during the final two weeks of my Software Engineering Bootcamp with <a href="https://generalassemb.ly/education/software-engineering-immersive/london">General Assembly</a>.
+
+### Deployment link : https://job-tracer.netlify.app/
+
+### Login as the Demo User:
+
+Email: demo@gmail.com
+Password: 123456
+
+# Getting Started/Code installation
+
+If you would like to Clone and run this project on your machine follow these steps:
+
+1. Clone this Repo and run
+
+```javaScript
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
 
 # Technical requirements
 
@@ -42,7 +61,7 @@ Job tracker is an application thats designed to help people organise, manage and
 
 ## Entity Relationship Diagram
 
-https://excalidraw.com/#json=7CHE8FLyID1JPYeHu60NB,_GapVAfVN2yRe41bSalVIQ
+<img src="images/ERD-project4.png">
 
 ## Wireframe
 
