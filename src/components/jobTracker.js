@@ -1,5 +1,5 @@
 import { AiOutlineClose } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateJobStatusById } from "../lib/api/api";
 import authAxios from "../lib/authAxios";
 import apiRoute from "../lib/apiRoute";

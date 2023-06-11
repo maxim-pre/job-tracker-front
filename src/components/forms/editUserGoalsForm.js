@@ -27,6 +27,7 @@ const EditUserGoalsForm = ({ currentUser, setCurrentUser, closeForm }) => {
 
     try {
       const response = await authAxios.patch(`${apiRoute}signup`, data);
+      console.log(response);
       setCurrentUser({
         ...currentUser,
         application_goal: applicationGoal,

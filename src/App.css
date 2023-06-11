@@ -29,18 +29,14 @@
 }
 
 .rendered-content {
-  /* Set font family and size */
   font-family: Arial, sans-serif;
   font-size: 14px;
 
-  /* Set line height */
   line-height: 1.5;
 
-  /* Set default text color */
   color: #333;
 }
 
-/* Set heading styles */
 .rendered-content h1 {
   font-size: 24px;
   font-weight: bold;
@@ -59,12 +55,10 @@
   margin-bottom: 8px;
 }
 
-/* Set paragraph styles */
 .rendered-content p {
   margin-bottom: 16px;
 }
 
-/* Set list styles */
 .rendered-content ul,
 .rendered-content ol {
   margin-bottom: 16px;
@@ -76,7 +70,7 @@
 }
 
 .rendered-content ul li::before {
-  content: "\2022"; /* Bullet point character */
+  content: "\2022";
   color: #333;
   display: inline-block;
   width: 1em;
