@@ -2,12 +2,12 @@
 
 Job tracker is an application that's designed to help people organise, manage and track their job applications throughout the hiring process. It provides centralized platform to keep all job-related information organized and easily accessible. This is a Full-Stack application using a Rails API with a React Front-End and was built in during the final two weeks of my Software Engineering Bootcamp with <a href="https://generalassemb.ly/education/software-engineering-immersive/london">General Assembly</a>.
 
-### Deployment link : https://job-tracer.netlify.app/
+### **Deployment link** : https://job-tracer.netlify.app/
 
 ### Login as the Demo User:
 
-Email: demo@gmail.com
-Password: 123456
+**Email**: demo@gmail.com
+**Password**: 123456
 
 # Getting Started/Code installation
 
@@ -25,34 +25,34 @@ If you would like to Clone and run this project on your machine follow these ste
 
 ### Stack
 
-- Rails
-- React
-- PostgreSQL
-- Tailwind CSS
-- JavaScript
-- Ruby
+- **Rails**
+- **React**
+- **PostgreSQL**
+- **Tailwind CSS**
+- **JavaScript**
+- **Ruby**
 
 ### Npm Packages
 
-- React Quill (Used for the text editors)
-- React-Modal (Used for all Modal components)
-- ReCharts (used to Create bar and line charts)
-- React-Toasify (used for the notification pop-ups)
-- React-Router
-- React-Icons
-- Axios (HTTP client)
+- **React Quill** (used for the text editors)
+- **React-Modal** (used for all Modal components)
+- **ReCharts** (used to Create bar and line charts)
+- **React-Toasify** (used for the notification pop-ups)
+- **React-Router**
+- **React-Icons**
+- **Axios** (HTTP client)
 
 ### Gems
 
-- Devise (Gem used to implement user authentication)
-- Devise-JWT (Devise extension to use JWT tokens for Authentication)
+- **Devise** (Gem used to implement user authentication)
+- **Devise-JWT** (Devise extension to use JWT tokens for Authentication)
 
 ### Developer tools
 
-- Postman
-- Github
-- VScode
-- Pesticide
+- **Postman**
+- **Github**
+- **VScode**
+- **Pesticide**
 
 # Technical requirements
 
@@ -71,12 +71,6 @@ If you would like to Clone and run this project on your machine follow these ste
   - DRY (do no repeat) code
 - Application must be deployed
 - include README.md file
-
-### Developer Tools
-
-- VS Code
-- Pesticide (Google chrome extension to help with styling)
-- PostMan (used to test API)
 
 # planning
 
