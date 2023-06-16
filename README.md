@@ -47,6 +47,13 @@ If you would like to Clone and run this project on your machine follow these ste
 - Devise (Gem used to implement user authentication)
 - Devise-JWT (Devise extension to use JWT tokens for Authentication)
 
+### Developer tools
+
+- Postman
+- Github
+- VScode
+- Pesticide
+
 # Technical requirements
 
 - Have a minimum of two models
@@ -137,7 +144,7 @@ include Devise::JWT::RevocationStrategies::JTIMatcher
   end
 ```
 
-You Can see the Users table I've added a column called JTI. Whenever a token is dispached for a user the JTI claim is taken from the user model. When a user logs out thier JTI is changed so the token won't be valid anymore.
+You Can see the Users table I've added a column called JTI. Whenever a token is dispached for a user the JTI claim is taken from the user model. When a user logs out thier JTI is changed so the token won't be valid anymore. I chose this strategy because it reduces the risk of multiple valid tokens at a given time, because the JTI changes whenever a user Session has terminated.
 
 To tell devise to communicate with JSON I created a Registrations and a sessions Controller. The registrations controller handles operations such as creating and updating a user while the sessions controller handles operations such as signing in logging out.
 
@@ -233,3 +240,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 end
 ```
+
+# Challenges
+
+Overall I felt pretty confortable with the front-end portion of the project as React is a framework I was familiar with. On the other hand this was my first project using Rails and and was a challenging learning experience. I found that Rails does a lot of "magic" behing the scences so I found debugging confusing because I often couldnt find the root of the issue. For example, when I trying to handle updating a user in the registrations controller I kept getting the error "Can't update user password required". I eventually solved this by adding the method "update_user_without_password" but was it was a nightmare to figure out what was going wrong.
+
+# Wins
+
+Overall I'm very pleased with how the app has turned out and I was able to implement the core functionality of the app within the project timeframe. I am especially pleased with the UI. For example, I think i've made great usage of screen space on the dashboard and I think each componenent has a clear purpose and is useful to the user.
+
+<img src="images/jobTracker.png">
+
+# Key Learnings/Takeaways
+
+Perhaps one of the main learning experiences for me was state management and dataflow. This was something I overlooked during the planning phase and probably would've saved be a couple headaches down the road. For example, in my app.js component I fetched all jobs for the logged in user, but when a user selects a job I make another get request to fetch the job based on the Job id passed in the url. This was not only an unecessary API call since I could've passed down the data from the app component, it complecated managing the state of the application. With this implementation whenever I updated a job I would have to call a function to update the state in the app.js component. Going foreward this is something I will plan in future projects.
+
+# Bugs
+
+The app is fully responsive, although there is a bug where the graphs won't render if the dashboard is rendered on a small screen. Although if the dashboard is rendered on a large screen but is then scaled down to a small screen the graphs appear just fine. this is something I will definately be fixing soon.
+
+# Future Improvements
+
+There are a few features that I planned to add but did not have enough time to complete within the project timeframe.
+
+1. Contacts - I planned to add a page where users can keep track of all job related contacts stored in a table similar to the job tracking table
+
+2. Interview tracking - I feature where users can keep track of interview within a job application. Users can add details like the type of interview, make note and add the contacts of their interviewers.
