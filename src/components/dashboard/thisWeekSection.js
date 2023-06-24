@@ -25,10 +25,10 @@ const ThisWeekSection = ({ jobs, currentUser }) => {
   const data = generateDataForCurrentWeek();
 
   let total = 0;
-  jobs.forEach((job) => {
-    data.forEach((entry) => {
-      if (entry.day === job.date_applied) total += 1;
-      entry.applications = total;
+  data.forEach((day) => {
+    jobs.forEach((job) => {
+      if (job.date_applied === day.day) total += 1;
+      day.applications = total;
     });
   });
 
