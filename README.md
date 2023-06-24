@@ -104,7 +104,7 @@ https://www.figma.com/file/gKHg3tLKOQoeTzkwTcxe3j/Figma-basics?type=design&node-
 
 # Build/Code Process
 
-## Implementing the User model
+## Back-end
 
 Starting off with building the Rails API, my first goal was to implement my User modal as Well as routes and controllers to handle Logging in, Logging out, Signing up, ect. To do this I created a Devise User modal and Used Devise-JWT to configure authentication using JWT-tokens.
 
@@ -233,6 +233,255 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 end
+```
+
+Next it was time to start implementing the other models into the API. These included; Jobs, Notes, Contacts, Interviews. These were much more straight foreward to implement and I used the following process.
+
+1. Generate the model in rails passing in all related fields from the ERD
+2. Create new routes in Routes.rb file to handle requests on the new model
+
+```ruby
+resources :jobs do
+    resources :interviews
+    resources :notes
+  end
+  resources :contacts
+```
+
+3. create a controller to handle all requests to the routes specified in the routes folder. For example, the code snippet below shows how I handled post request to create a new job.
+
+```ruby
+def create
+        @job = Job.new(job_params)
+        @job.user_id = current_user.id
+
+        if @job.save
+            render json: {status: 'SUCCESS', message: 'job is saved', data:@job }, status: :ok
+        else
+            render json: {status: 'Error', message: 'error saving job', data:@job.errors}, status: :unprocessable_entity
+        end
+
+    end
+```
+
+## Front-end
+
+After creating the react app with `$npx create react-app`. I wanted to start of by making it possible for a user to create and account, login and Logout.
+
+I started by creating the following axios instance:
+
+```javascript
+const authAxios = axios.create({
+  baseURL: "http://localhost:4000",
+  headers: {
+    Authorization: `${localStorage.getItem("token")}`,
+  },
+});
+```
+
+I would be using this for all requests to authenticated endpoints because it will automatically crab the JWT token from local storage whenever it's called.
+
+Next I started creating the forms which are essentially a collection of the formInput component
+
+```javascript
+const FormInput = ({ placeholder, type, value, onChange, errors, name }) => {
+  return (
+    <div>
+      <input
+        className={`my-4 rounded-sm  focus:outline-0 border border-gray py-2 px-1 focus:ring-1 focus:ring-gray-300 focus:ring-opacity-40 placeholder:text-sm text-sm w-full ${
+          (errors && errors[name]) || (errors && typeof errors === "string")
+            ? "border-error ring-error"
+            : ""
+        }`}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        id={name ? name : ""}
+      ></input>
+      {errors[name] && (
+        <FormError label={placeholder} message={errors[name][0]} />
+      )}
+    </div>
+  );
+};
+```
+
+After Creating the forms I wrote the submit functions to make the calls to the api.
+
+to Login:
+
+```javascript
+const submit = async () => {
+  const user = {
+    email: email,
+    password: password,
+  };
+  try {
+    const response = await axios.post(`${apiRoute}login`, { user: user });
+    localStorage.setItem("token", response.headers.authorization);
+    setError("");
+    window.location.href = "/";
+  } catch (error) {
+    console.log(error);
+    setError(error.response.data);
+  }
+};
+```
+
+To Sign up:
+
+```javascript
+const submit = async () => {
+  const user = {
+    email: email,
+    password: password,
+    first_name: firstName,
+    last_name: lastName,
+  };
+  try {
+    const response = await authAxios.post(`${apiRoute}signup`, {
+      user: user,
+    });
+    localStorage.setItem("token", response.headers.authorization);
+    setErrors("");
+    window.location.href = "/";
+  } catch (error) {
+    setErrors(error.response.data.status.errors);
+  }
+};
+```
+
+After implementing User login, signup, logout on the front-end I could now focus on the main feature of the application, the job tracker.
+
+The job tracker page is essentially one big table, where the user can perform full CRUD on the jobs. If a user Selects one of the jobs, they are redirected to a more detailed page about that specific job.
+
+Here are the columns of the jobs table
+
+```javascript
+const columns = [
+  {
+    key: "select",
+    content: (job) => (
+      <input
+        type="checkbox"
+        checked={selectedJobIds.includes(job.id)}
+        onChange={() => onSelectJob(job.id)}
+      />
+    ),
+  },
+  { path: "title", label: "Title", link: navigateToJob },
+  { path: "company", label: "Company", link: navigateToJob },
+  { path: "location", label: "Location", link: navigateToJob },
+  { path: "max_salary", label: "Max Salary", link: navigateToJob },
+  { path: "status", label: "Status", link: navigateToJob },
+  { path: "date_applied", label: "Date Applied", link: navigateToJob },
+];
+```
+
+I created a generic table header and table body component to extract all reusable logic. Because I planned to Have another table to store all the users contacts.
+
+```javascript
+<table className="table-auto w-full">
+  <TableHeader columns={columns} onSort={onSort} sortColumn={sortColumn} />
+  <TableBody columns={columns} data={jobs} />
+</table>
+```
+
+Here's the table header where I'm rendering the column labels, aswell as a sort icon depending on if the column is selected and whether is descending or ascending.
+
+```jsx
+<thead>
+  <tr className="">
+    {columns.map((col) => {
+      return (
+        <th
+          key={col.path ? col.path : col.key}
+          onClick={() => raiseSort(col.path)}
+          className={`${
+            col.content
+              ? "border-r border-lightgray"
+              : "border-r border-l border-gray"
+          } bg-lightgray text-sm font-bold hover:bg-lightgray `}
+        >
+          <div className="flex items-center py-4 px-4 justify-center">
+            {renderSortIcon(col)}
+            {col.label}
+          </div>
+        </th>
+      );
+    })}
+  </tr>
+</thead>
+```
+
+The table body renders each cell using the function below.
+
+```javaScript
+import _ from 'lodash'
+
+  const getContent = (item, column) => {
+    const content = _.get(item, column.path);
+    if (typeof content === "string") {
+      return content.charAt(0).toUpperCase() + content.slice(1);
+    } else {
+      return content;
+    }
+  };
+```
+
+```javascript
+const renderCell = (item, column) => {
+  if (column.content) return column.content(item);
+  return getContent(item, column);
+};
+```
+
+First I'm checking if the column has a key called content. Content is a key the maps to a function that takes the item as an argument. In my case, One of the columns of the jobs table is a checkbox, so to render the checkbox im calling the functions stored under the key 'content'.
+
+to handle linking to the job when the user clicks on the table row, you mak have noticed the 'link' key in the columns object. Here I'm referencing a function that calls when a user clicks on the cell.
+
+```javascript
+const navigate = useNavigate();
+const navigateToJob = (job) => {
+  navigate(`/jobtracker/${job.id}`);
+};
+```
+
+Then on the table cell I have this code:
+
+```Javascript
+onClick={col.link ? () => col.link(item) : undefined}
+```
+
+Lastly I want to go over How I implemented the charts on the dashboard using ReCharts.
+
+For the bar and line chart components, they both take in a 'data' argument which is a list of objects with each key representing a point on the Xaxis and value is the corresponding point on the Yaxis.
+
+For the line chart I used the function below to create a list of 7 objects, with each key represending the date of the current week (Mon-Sun).
+
+```javascript
+const generateDataForCurrentWeek = () => {
+  const currentDate = new Date();
+  const currentDay = currentDate.getDay();
+  const days = [];
+  const startDayOffset = currentDay === 0 ? -6 : 1 - currentDay;
+
+  for (let i = startDayOffset; i < startDayOffset + 7; i++) {
+    const date = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate() + i
+    );
+    const day = `${date.getFullYear()}-${
+      date.getMonth() + 1 < 10
+        ? "0" + (date.getMonth() + 1).toString()
+        : date.getMonth() + 1
+    }-${date.getDate() < 10 ? "0" + date.getDate() : date.getDate()}`;
+    days.push({ day: day, applications: 0 });
+  }
+  return days;
+};
 ```
 
 # Challenges
