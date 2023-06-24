@@ -484,6 +484,18 @@ const generateDataForCurrentWeek = () => {
 };
 ```
 
+To make each date with the users Job applications that week I made this function.
+
+```javascript
+let total = 0;
+data.forEach((day) => {
+  jobs.forEach((job) => {
+    if (job.date_applied === day.day) total += 1;
+    day.applications = total;
+  });
+});
+```
+
 # Challenges
 
 Overall I felt pretty confortable with the front-end portion of the project as React is a framework I was familiar with. On the other hand this was my first project using Rails and and was a challenging learning experience. I found that Rails does a lot of "magic" behing the scences so I found debugging confusing because I often couldnt find the root of the issue. For example, when I trying to handle updating a user in the registrations controller I kept getting the error "Can't update user password required". I eventually solved this by adding the method "update_user_without_password" but was it was a nightmare to figure out what was going wrong.
