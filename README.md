@@ -1,6 +1,6 @@
 # Job tracker
 
-Job tracker is an application that's designed to help people organise, manage and track their job applications throughout the hiring process. It provides centralized platform to keep all job-related information organized and easily accessible. This is a Full-Stack application using a Rails API with a React Front-End and was built in during the final two weeks of my Software Engineering Bootcamp with <a href="https://generalassemb.ly/education/software-engineering-immersive/london">General Assembly</a>.
+Job tracker is an application that's designed to help people organise, manage and track their job applications throughout the hiring process. It provides a centralized platform to keep all job-related information organised and easily accessible. This is a Full-Stack application using a Rails API with a React Front-End and was built during the final two weeks of my Software Engineering Bootcamp with <a href="https://generalassemb.ly/education/software-engineering-immersive/london">General Assembly</a>.
 
 ### **Deployment link** : https://job-tracer.netlify.app/
 
@@ -58,15 +58,15 @@ If you would like to Clone and run this project on your machine follow these ste
 
 - Have a minimum of two models
 - Use Authentication
-- Have full CRUD on at leasy one model
+- Have full CRUD on at least one model
 - Be able to create and destroy and secondary models
 - quality code:
 - Main point 1
   - Follow naming conventions
-  - Consitent indentation
+  - Consistent indentation
   - well-structured and readable code
   - semantic naming
-  - consice functions
+  - concise functions
   - efficient code
   - DRY (do no repeat) code
 - Application must be deployed
@@ -76,7 +76,7 @@ If you would like to Clone and run this project on your machine follow these ste
 
 ## User Stories
 
-- As a user I should be able to create an account and include goals such as target salary, application goals and target titlle so I can stay on track
+- As a user I should be able to create an account and include goals such as target salary, application goals and target title so I can stay on track
 
 - As a user I should be able to log jobs I'm thinking of applying for so I can track their progress
 
@@ -138,7 +138,7 @@ include Devise::JWT::RevocationStrategies::JTIMatcher
   end
 ```
 
-You Can see the Users table I've added a column called JTI. Whenever a token is dispached for a user the JTI claim is taken from the user model. When a user logs out thier JTI is changed so the token won't be valid anymore. I chose this strategy because it reduces the risk of multiple valid tokens at a given time, because the JTI changes whenever a user Session has terminated.
+You can see the Users table I've added a column called JTI. Whenever a token is dispatched for a user the JTI claim is taken from the user model. When a user logs out thier JTI is changed so the token won't be valid anymore. I chose this strategy because it reduces the risk of multiple valid tokens at a given time, because the JTI changes whenever a user session has terminated.
 
 To tell devise to communicate with JSON I created a Registrations and a sessions Controller. The registrations controller handles operations such as creating and updating a user while the sessions controller handles operations such as signing in logging out.
 
@@ -235,7 +235,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 end
 ```
 
-Next it was time to start implementing the other models into the API. These included; Jobs, Notes, Contacts, Interviews. These were much more straight foreward to implement and I used the following process.
+Next it was time to start implementing the other models into the API. These included; Jobs, Notes, Contacts, Interviews. These were much more straightforeward to implement and I used the following process.
 
 1. Generate the model in rails passing in all related fields from the ERD
 2. Create new routes in Routes.rb file to handle requests on the new model
@@ -248,7 +248,7 @@ resources :jobs do
   resources :contacts
 ```
 
-3. create a controller to handle all requests to the routes specified in the routes folder. For example, the code snippet below shows how I handled post request to create a new job.
+3. create a controller to handle all requests to the routes specified in the routes folder. For example, the code snippet below shows how I handled post requests to create a new job.
 
 ```ruby
 def create
@@ -266,7 +266,7 @@ def create
 
 ## Front-end
 
-After creating the react app with `$npx create react-app`. I wanted to start of by making it possible for a user to create and account, login and Logout.
+After creating the react app with `$npx create react-app`. I wanted to start off by making it possible for a user to create and account, login and Logout.
 
 I started by creating the following axios instance:
 
@@ -279,7 +279,7 @@ const authAxios = axios.create({
 });
 ```
 
-I would be using this for all requests to authenticated endpoints because it will automatically crab the JWT token from local storage whenever it's called.
+I would be using this for all requests to authenticated endpoints because it will automatically grab the JWT token from local storage whenever it's called.
 
 Next I started creating the forms which are essentially a collection of the formInput component
 
@@ -379,7 +379,7 @@ const columns = [
 ];
 ```
 
-I created a generic table header and table body component to extract all reusable logic. Because I planned to Have another table to store all the users contacts.
+I created a generic table header and table body component to extract all reusable logic. Because I planned to have another table to store all the users' contacts.
 
 ```javascript
 <table className="table-auto w-full">
@@ -388,7 +388,7 @@ I created a generic table header and table body component to extract all reusabl
 </table>
 ```
 
-Here's the table header where I'm rendering the column labels, aswell as a sort icon depending on if the column is selected and whether is descending or ascending.
+Here's the table header where I'm rendering the column labels, as well as a sort icon depending on if the column is selected and whether it is descending or ascending.
 
 ```jsx
 <thead>
@@ -437,9 +437,9 @@ const renderCell = (item, column) => {
 };
 ```
 
-First I'm checking if the column has a key called content. Content is a key the maps to a function that takes the item as an argument. In my case, One of the columns of the jobs table is a checkbox, so to render the checkbox im calling the functions stored under the key 'content'.
+First I'm checking if the column has a key called content. Content is a key the maps to a function that takes the item as an argument. In my case, One of the columns of the jobs table is a checkbox, so to render the checkbox I'm calling the functions stored under the key 'content'.
 
-to handle linking to the job when the user clicks on the table row, you mak have noticed the 'link' key in the columns object. Here I'm referencing a function that calls when a user clicks on the cell.
+To handle linking to the job when the user clicks on the table row, you may have noticed the 'link' key in the columns object. Here I'm referencing a function that calls when a user clicks on the cell.
 
 ```javascript
 const navigate = useNavigate();
@@ -456,9 +456,9 @@ onClick={col.link ? () => col.link(item) : undefined}
 
 Lastly I want to go over How I implemented the charts on the dashboard using ReCharts.
 
-For the bar and line chart components, they both take in a 'data' argument which is a list of objects with each key representing a point on the Xaxis and value is the corresponding point on the Yaxis.
+For the bar and line chart components, they both take in a 'data' argument which is a list of objects with each key representing a point on the X axis and value is the corresponding point on the Y axis.
 
-For the line chart I used the function below to create a list of 7 objects, with each key represending the date of the current week (Mon-Sun).
+For the line chart I used the function below to create a list of 7 objects, with each key representing the date of the current week (Mon-Sun).
 
 ```javascript
 const generateDataForCurrentWeek = () => {
@@ -498,21 +498,21 @@ data.forEach((day) => {
 
 # Challenges
 
-Overall I felt pretty confortable with the front-end portion of the project as React is a framework I was familiar with. On the other hand this was my first project using Rails and and was a challenging learning experience. I found that Rails does a lot of "magic" behing the scences so I found debugging confusing because I often couldnt find the root of the issue. For example, when I trying to handle updating a user in the registrations controller I kept getting the error "Can't update user password required". I eventually solved this by adding the method "update_user_without_password" but was it was a nightmare to figure out what was going wrong.
+Overall I felt pretty comfortable with the front-end portion of the project as React is a framework I was familiar with. On the other hand this was my first project using Rails and and was a challenging learning experience. I found that Rails does a lot of "magic" behind the scenes so I found debugging confusing because I often couldn't find the root of the issue. For example, when I trying to handle updating a user in the registrations controller I kept getting the error "Can't update user password required". I eventually solved this by adding the method "update_user_without_password" but was it was a nightmare to figure out what was going wrong.
 
 # Wins
 
-Overall I'm very pleased with how the app has turned out and I was able to implement the core functionality of the app within the project timeframe. I am especially pleased with the UI. For example, I think i've made great usage of screen space on the dashboard and I think each componenent has a clear purpose and is useful to the user.
+Overall I'm very pleased with how the app has turned out and I was able to implement the core functionality of the app within the project timeframe. I am especially pleased with the UI. For example, I think I've made great use of screen space on the dashboard and I think each component has a clear purpose and is useful to the user.
 
 <img src="images/jobTracker.png">
 
 # Key Learnings/Takeaways
 
-Perhaps one of the main learning experiences for me was state management and dataflow. This was something I overlooked during the planning phase and probably would've saved be a couple headaches down the road. For example, in my app.js component I fetched all jobs for the logged in user, but when a user selects a job I make another get request to fetch the job based on the Job id passed in the url. This was not only an unecessary API call since I could've passed down the data from the app component, it complecated managing the state of the application. With this implementation whenever I updated a job I would have to call a function to update the state in the app.js component. Going foreward this is something I will plan in future projects.
+Perhaps one of the main learning experiences for me was state management and dataflow. This was something I overlooked during the planning phase and probably would've saved a couple headaches down the road. For example, in my app.js component I fetched all jobs for the logged in user, but when a user selects a job I make another request to fetch the job based on the Job id passed in the url. This was not only an unnecessary API call since I could've passed down the data from the app component, it complicated managing the state of the application. With this implementation whenever I updated a job I would have to call a function to update the state in the app.js component. Going forward this is something I will plan in future projects.
 
 # Bugs
 
-The app is fully responsive, although there is a bug where the graphs won't render if the dashboard is rendered on a small screen. Although if the dashboard is rendered on a large screen but is then scaled down to a small screen the graphs appear just fine. this is something I will definately be fixing soon.
+The app is fully responsive, although there is a bug where the graphs won't render if the dashboard is rendered on a small screen. Although if the dashboard is rendered on a large screen but is then scaled down to a small screen the graphs appear just fine. This is something I will be fixing soon.
 
 # Future Improvements
 
@@ -520,4 +520,4 @@ There are a few features that I planned to add but did not have enough time to c
 
 1. Contacts - I planned to add a page where users can keep track of all job related contacts stored in a table similar to the job tracking table
 
-2. Interview tracking - I feature where users can keep track of interview within a job application. Users can add details like the type of interview, make note and add the contacts of their interviewers.
+2. Interview tracking - I feature where users can keep track of interviews within a job application. Users can add details like the type of interview, make notes and add the contacts of their interviewers.
