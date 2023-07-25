@@ -95,7 +95,7 @@ const JobTracker = ({ jobs, setJobs }) => {
   );
 
   return (
-    <div className="flex flex-col justify-center max-h-screen p-4 ">
+    <div className="flex flex-col justify-center max-h-screen p-4">
       <div className="bg-white w-full border border-gray h-20 mb-2 hidden md:flex py-2 px-1 ">
         <JobListGroups
           status={listGroup}
@@ -103,7 +103,7 @@ const JobTracker = ({ jobs, setJobs }) => {
           jobs={jobs}
         />
       </div>
-      <div className="bg-white w-full border border-gray p-2">
+      <div className="bg-white w-full border border-gray p-2 overflow-y-auto">
         <div className="flex md:hidden">
           <Dropdown
             label={"Filter by Status"}
@@ -131,7 +131,7 @@ const JobTracker = ({ jobs, setJobs }) => {
           selectedJobIds={selectedJobIds}
         />
         {/* table content */}
-        <div className="w-full overflow-x-auto">
+        <div className="w-full overflow-x-auto overflow-y-auto">
           <JobsTable
             sortColumn={sortColumn}
             onSort={onSort}
